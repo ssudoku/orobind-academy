@@ -1,0 +1,352 @@
+@import "partials/definitions";
+@import "partials/popup";
+@import "partials/grid";
+@import "partials/picker";
+
+body {
+	width: 100%; overflow-x:hidden; background: white;
+}
+.hidden {
+	display:none;
+}
+.widget {
+	box-shadow: 0 0 2px 1px rgba($soft-grey,0.3); box-sizing: border-box; width: 260px;
+}
+.sidenav {
+	width:260px; height:1600px; background:darken($hard-grey,5%); color:white; padding:15px 30px;
+	position:fixed; z-index:100; left:-260px; top:0; box-sizing:border-box; transition:left 0.5s ease-in-out;
+	&.active {
+		left:0;
+	}
+	.sidenavlist {
+		a {
+			display:block; padding:20px 0; text-decoration:none; font-size:1.125em;
+			color:white; border-bottom:2px solid $hard-grey; font-weight: 700;
+			&:last-child {
+				border:0;
+			}
+		}
+		.callback {
+			color:white; padding:10px; text-align:center;
+		}
+	}
+}
+.wrapper {
+	position:relative; @include vendorStyle(flex-direction,column);
+	padding-top: 48px; @include vendorProp(display,flex); left:0;
+	min-height: calc(100vh - 80px); transition:left 0.5s ease-in-out;
+	&.active {
+		left:260px;
+		.topNav {
+			&.sticky {
+				transition:left 0.5s ease-in-out; left:-260px;
+			}
+		}
+	}
+}
+.pageBlocks {
+	position:relative; z-index: 4;
+}
+.topMenu {
+	background: $primary-color; box-sizing: border-box; padding: 12px; z-index: 99;
+	@include vendorStyle(justify-content,space-between); position: fixed; left: 0; width: 100%;
+	@include vendorStyle(align-items,center); top: 0; transition: all 0.5s ease-in-out;
+	&.sticky {
+		background: rgba(white,0.98); border-bottom: 2px solid rgba($light-grey,0.75);
+		.topNav {
+			a {
+				color:$primary-color;
+			}
+		}
+	}
+	&.active {
+		left: 260px;
+	}
+	.topLogo {
+		height: 24px; width: auto;
+	}
+	.menutoggle {
+		background:none; height: 16px; padding: 0; line-height: 16px; margin-right: 20px;
+		img {
+			display: block;
+		}
+	}
+	.leftHuddle {
+		@include vendorStyle(align-items,center); width: 100%;
+		@include vendorStyle(justify-content,space-between);
+	}
+}
+.topNav {
+	transition: all 1s ease; @include vendorStyle(backface-visibility,hidden); display: none;
+	text-align:right; @include vendorStyle(justify-content,flex-end); @include vendorStyle(align-items,center);
+	a {
+		text-decoration: none; color:white; font-weight: 700;
+		margin-left: 40px; font-size: 1.125em; letter-spacing: 0;
+		&:last-child {
+			margin-right: 0;
+		}
+		&.trial {
+			background: $primary-color; color: white; line-height: 1; padding: 7px 10px;
+		}
+	}
+}
+@media screen and (min-width:768px) {
+	.wrapper {
+		padding-top: 67px;
+	}
+	.topMenu {
+		padding: 16px;
+		.topLogo {
+			height: 35px;
+		}
+		.menutoggle {
+			display: none;
+		}
+		.leftHuddle {
+			width: auto;
+		}
+	}
+	.topNav {
+		@include vendorProp(display,flex);
+	}
+}
+.home {
+	min-height: calc(100vh - 48px); background: url(../img/bg-academy-mobile.jpg);
+	background-size: cover; background-position: left bottom;
+	@include vendorProp(display,flex); @include vendorStyle(justify-content,center);
+	@include vendorStyle(align-items,center);
+	.sectionCta {
+		color: white; font-weight: 600; background: $accent-color; width: 210px;
+		.btnArrow {
+			margin-left: 15px;
+		}
+	}
+	.mainTitle {
+		font-size: 1.5em;
+	}
+	.homeText {
+		font-size: 1em; margin-bottom: 1.8em;
+	}
+	.rightWrap {
+		width: 100%; padding: 20px; box-sizing: border-box;
+	}
+}
+@media screen and (min-width:768px){
+	.home {
+		min-height: calc(100vh - 67px); background: url(../img/bg-academy.jpg);
+		@include vendorStyle(justify-content,flex-end); background-position: left top;
+		.rightWrap {
+			width: 360px;
+		}
+		.mainTitle {
+			font-size: 2em;
+		}
+		.homeText {
+			font-size: 1.25em; margin-bottom: 2.5em; line-height: 1.8;
+		}
+	}
+}
+@media screen and (min-width:992px){
+	.home {
+		.rightWrap {
+			width: 500px; padding: 30px;
+		}
+	}
+}
+.courses {
+	padding: 20px;
+	.courseCol {
+		padding: 10px;
+	}
+	.col-md-8 {
+		.col-md-6 {
+			padding: 0;
+			&:last-child {
+				padding: 20px;
+			}
+		}
+	}
+	.includes {
+		li {
+			margin-bottom: 7px;
+			&:last-child {
+				margin-bottom: 0;
+			}
+			&:before {
+				content: '\2713';
+				font-family: $body-font;
+				font-size: 1em;
+				margin-right: 10px;
+				display: inline-block;
+			}
+		}
+	}
+	.courseContainer {
+		box-shadow: 0 0 5px 0 rgba($soft-grey,0.4); background: white;
+	}
+	.coursePic {
+		display: block; width: 100%; height: auto; margin-bottom: 20px;
+		&.tall {
+			height: 100%; width: auto; margin-bottom: 0;
+		}
+	}
+	.col-md-4 {
+		.courseTitle {
+			padding: 0 24px;
+		}
+		.courseDesc {
+			padding: 0 24px 30px 24px;
+		}
+	}
+}
+.sectionTitle {
+	text-align: center; margin-bottom: 1.5em;
+}
+@media screen and (min-width:768px){
+	.courses {
+		padding: 30px 0;
+		.courseCol {
+			padding: 30px;
+			&.col-md-8 {
+				padding: 30px 42px;
+			}
+		}
+	}
+}
+.pricing {
+	background: $hard-grey; padding: 20px;
+	.sectionTitle {
+		color: white; margin-bottom: 0;
+	}
+	.pricingPlans {
+		@include vendorProp(display,flex); @include vendorStyle(flex-direction,column);
+		@include vendorStyle(justify-content,space-between); @include vendorStyle(align-items,flex-end);
+	}
+	.plan {
+		background: white;
+	}
+	.highlight {
+		color:white; text-align: center; padding: 30px;
+		&.good {
+			background: #6adfa3;
+		}
+		&.least {
+			background: $primary-color;
+		}
+		&.most {
+			background: $accent-color;
+		}
+		.planTitle {
+			font-size: 1.5em;
+		}
+		.price {
+			font-size: 2.5em; margin-bottom: 0;
+		}
+	}
+	.features {
+		padding: 30px;
+	}
+	.featureList {
+		li {
+			margin-bottom: 7px;
+			&:last-child {
+				margin-bottom: 0;
+			}
+			&:before {
+				content: '\2713';
+				font-family: $body-font;
+				font-size: 1em;
+				margin-right: 10px;
+				display: inline-block;
+			}
+		}
+	}
+}
+@media screen and (min-width:768px){
+	.pricing {
+		padding: 40px 0;
+		.pricingPlans {
+			@include vendorStyle(flex-direction,row);
+		}
+		.planWrap {
+			width: 33.33%; box-sizing: border-box; padding: 30px;
+		}
+	}
+}
+.footer {
+	padding: 10px; box-sizing: border-box; border-top:2px solid $light-grey; background: white;
+	@include vendorProp(display,flex); @include vendorStyle(flex-direction,column);
+	@include vendorStyle(justify-content,space-between); @include vendorStyle(align-items,center);
+	font-size: 0.875em;
+	.footerLogo {
+		height: 20px; width: auto; display: block;
+	}
+	.footerNav {
+		margin: 10px 0;
+		a {
+			color: $hard-grey; text-decoration: none; letter-spacing: 0; margin: 15px 0;
+			display: inline-block; width: 48%;
+			&:nth-child(even) {
+				text-align: right;
+			}
+		}
+	}
+	.socialSection {
+		@include vendorStyle(justify-content,flex-end); @include vendorStyle(align-items,center);
+	}
+	.socialImg {
+		display: block; margin-left: 10px;
+	}
+}
+@media screen and (min-width:768px) {
+	.footer {
+		@include vendorStyle(flex-direction,row); padding: 20px; margin-top: 30px;
+		.footerNav {
+			margin: 0;
+			a {
+				margin: 0 30px; width: auto; display: inline;
+			}
+		}
+	}
+}
+.faq {
+	padding: 10px 0;
+	.questionWrap {
+		background: white; padding: 10px; margin-bottom: 15px;
+		box-shadow: 0 0 5px 0 rgba($soft-grey,0.4);
+		&.open {
+			.question {
+				color: $hard-grey;
+				&:before {
+					content: "\2796";
+				}
+			}
+			.answer {
+				height: auto; margin: 15px 0 0 0; opacity: 1;
+				visibility: visible; z-index: 2;
+			}
+		}
+	}
+	.question {
+		color: $primary-color; font-size: 1.125em; margin-bottom: 0; cursor: pointer;
+		&:before {
+			content: "\2795"; display:inline; margin-right: 10px; font-weight: bold;
+		}
+	}
+	.answer {
+		height: 0; opacity: 0; margin: 0; transition: all 0.3s ease;
+		visibility: hidden; position: relative; z-index: -2;
+	}
+}
+@media screen and (min-width:768px) {
+	.faq {
+		padding: 30px 0;
+		.questionWrap {
+			padding: 15px; margin-bottom: 30px;
+		}
+	}
+}
+@media screen and (min-width:992px) {
+}
+@media screen and (min-width:1280px) {
+}
